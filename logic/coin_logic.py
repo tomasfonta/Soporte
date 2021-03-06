@@ -17,7 +17,10 @@ def search_coin(query, user):
     ticker = result['id']
     image = result['image']['large']
     price = result['market_data']['current_price']['usd']
-    favorite = is_fav(ticker, user)
+    if user is not None:
+        favorite = is_fav(ticker, user)
+    else:
+        favorite = False
     percentage = result['market_data']['price_change_percentage_24h']
     coin = Coin(name=name, ticker=ticker, price=price, percentage=percentage, favorite=favorite, image=image, trade_price=0, trade_quantity=0)
     coins.append(coin)
